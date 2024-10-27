@@ -30,7 +30,7 @@
 
     apps.default = {
       type = "app";
-      program = "${pkgs.python311}/bin/python ${./main.py}";
+      program = "${pkgs.python311}/bin/python ${toString ./main.py}";
     };
 
   };
