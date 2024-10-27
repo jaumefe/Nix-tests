@@ -11,27 +11,22 @@
     python = pkgs.python311;
   
   in {
-    packages.default = pkgs.stdenv.mkDerivation {
+    packages.x86_64-linux.default = pkgs.stdenv.mkDerivation {
       name = "hello";
-      src = "./.";
+      src = ./.;
 
       buildInputs = [ python ];
 
       installPhase = ''
         mkdir -p $out/bin
-        cp ${./main.py} $out/bin/main.py      
-      '';
-
-      shellHook = ''
-        chmod +x $out/bin/main.py
+        install -m 755 ${./main.py} $out/bin/main.py      
       '';
 
     };
 
-    apps.default = {
+    apps.x86_64-linux.default = {
       type = "app";
-      program = "${pkgs.python311}/bin/python ${toString ./main.py}";
+      program = "$out/bin/main.py";
     };
-
   };
 }
